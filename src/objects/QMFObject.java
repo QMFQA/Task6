@@ -3,6 +3,7 @@ package objects;
 import logger.Logger;
 
 public abstract class QMFObject {
+	protected boolean created = false;
 	protected String name;
 	protected Logger logger = new Logger();
 

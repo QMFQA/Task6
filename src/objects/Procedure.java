@@ -2,8 +2,6 @@ package objects;
 
 public class Procedure extends QMFObject {
 	private String text;
-	private boolean created = false;
-	private String created_name;
 
 	public Procedure() {
 		name = "Procedure1";
@@ -12,7 +10,7 @@ public class Procedure extends QMFObject {
 
 	@Override
 	public QMFObject create() {
-		if (created == true && created_name.equals(getName())) {
+		if (created == true) {
 			logger.error(getType() + ": Object with name '" + getName() + "' already exists");
 			return this;
 		} else {

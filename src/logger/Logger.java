@@ -37,7 +37,6 @@ public class Logger {
 			fw.write(DATE_FORMAT.format(new Date()));
 			fw.write(message);
 			fw.write('\n');
-//			fw.flush();
 			fw.close();
 		} catch (IOException e) {
 			System.out.println("Cannot write to file");
@@ -61,7 +60,10 @@ public class Logger {
 				String line = scanner.nextLine();
 				Matcher matches = pattern.matcher(line);
 				if (matches.matches()) {
-					result.add(line);
+					String[] first = line.split("]");
+					String[] message = first[2].split(":");
+					String console = "(" + first[1].substring(1) + ")" + message[1];
+					result.add(console);
 				}
 			}
 			scanner.close();

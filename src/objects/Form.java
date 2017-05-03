@@ -1,8 +1,6 @@
 package objects;
 
 public class Form extends QMFObject {
-	private boolean created = false;
-	private String created_name;
 
 	public Form() {
 		name = "Form1";
@@ -10,12 +8,11 @@ public class Form extends QMFObject {
 
 	@Override
 	public QMFObject create() {
-		if (created == true && created_name.equals(getName())) {
+		if (created == true) {
 			logger.error(getType() + ": Object with name '" + getName() + "' already exists");
 			return this;
 		} else {
 			created = true;
-			created_name = getName();
 			logger.info(getKey() + " is created");
 			return this;
 		}

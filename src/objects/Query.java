@@ -2,8 +2,6 @@ package objects;
 
 public class Query extends QMFObject {
 	private String text;
-	private boolean created = false;
-	private String created_name;
 
 	public Query() {
 		name = "Query1";
@@ -12,7 +10,7 @@ public class Query extends QMFObject {
 
 	@Override
 	public QMFObject create() {
-		if (created == true && created_name.equals(getName())) {
+		if (created) {
 			logger.error(getType() + ": Object with name '" + getName() + "' already exists");
 			return this;
 		} else {
@@ -24,7 +22,7 @@ public class Query extends QMFObject {
 
 	@Override
 	public QMFObject run() {
-		if (created == true) {
+		if (created) {
 			logger.info(getKey() + " with SQL '" + text + "' is run");
 			return this;
 		} else {
@@ -35,7 +33,7 @@ public class Query extends QMFObject {
 
 	@Override
 	public QMFObject delete() {
-		if (created == true) {
+		if (created) {
 			created = false;
 			logger.info(getKey() + " with SQL '" + text + "' is deleted");
 			return this;
