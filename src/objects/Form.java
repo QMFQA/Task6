@@ -2,8 +2,8 @@ package objects;
 
 public class Form extends QMFObject{
 	
-	public Form(){
-		name = "Form1";
+	public Form(String _name){
+		name = _name;
 		exist = false;
 	}
 	
@@ -12,22 +12,23 @@ public class Form extends QMFObject{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public QMFObject create() {
-		if (exist)
-			LOG.error("Object with name '" + name + "' is already exist");
-		else {
-			LOG.info("'" + name + "' is created");
-			exist = true;
-		}
-		return this;
-	}
-
+	
 	@Override
 	public QMFObject run() {
 		LOG.error("Cannot run form");
 		return this;
+	}
+
+	@Override
+	public void printErrorExist() {
+		LOG.error("Object with name '" + name + "' is already exist");
+		
+	}
+
+	@Override
+	public void printInfoCreated() {
+		LOG.info("'" + name + "' is created");
+		
 	}
 
 }

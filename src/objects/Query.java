@@ -3,9 +3,9 @@ package objects;
 public class Query extends QMFObject{
 	private String sql;
 	
-	public Query(){
-		name = "Query1";
-		sql = "SELECT * FROM Q.STAFF";
+	public Query(String _name, String _sql){
+		name = _name;
+		sql = _sql;
 		exist = false;
 	}
 	
@@ -21,17 +21,6 @@ public class Query extends QMFObject{
 	}
 
 	@Override
-	public QMFObject create() {
-		if (exist)
-			LOG.error("Object with name '" + name + "' is already exist");
-		else {
-			exist = true;
-			LOG.info("'" + name + "' with SQL '" + sql +"' is created");
-		}
-		return this;
-	}
-
-	@Override
 	public QMFObject run() {
 		if (exist)
 			LOG.info("'" + name + "' with SQL '" + sql +"' is run");
@@ -39,5 +28,17 @@ public class Query extends QMFObject{
 			LOG.error("Object with name '" + name + "' is not exist");
 		return this;
 	}
+
+	@Override
+	public void printErrorExist() {
+		LOG.error("Object with name '" + name + "' is already exist");
+	}
+
+	@Override
+	public void printInfoCreated() {
+		LOG.info("'" + name + "' with SQL '" + sql +"' is created");
+	}
+	
+	
 
 }
