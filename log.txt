@@ -1,0 +1,12 @@
+[ERROR][2017-05-05 23:12]Query: Object with name 'Query1' is not exist
+[INFO][2017-05-05 23:12]Query: 'Query1' with SQL SELECT * FROM Q.STAFF'' is created
+[INFO][2017-05-05 23:12]Query: 'Query1' with SQL 'SELECT * FROM Q.STAFF' is run
+[INFO][2017-05-05 23:12]Query: 'Query1' with SQL 'SELECT * FROM Q.STAFF' is run
+[INFO][2017-05-05 23:12]Form: 'Form1' is created
+[ERROR][2017-05-05 23:12]Form: Cannot run form
+[ERROR][2017-05-05 23:12]Form: Object with name 'Form1' is already exist
+[ERROR][2017-05-05 23:12]Procedure: Object 'Procedure1' is not created and cannot be run
+[INFO][2017-05-05 23:12]Procedure: 'Procedure1' with SQL DISPLAY QUERY'' is created
+[INFO][2017-05-05 23:12]Procedure: 'Procedure1' with SQL 'DISPLAY QUERY' is run
+[INFO][2017-05-05 23:12]Procedure: 'Procedure1' with SQL DISPLAY QUERY'' is deleted
+[ERROR][2017-05-05 23:12]Procedure: Object with name 'Procedure1' is not exist

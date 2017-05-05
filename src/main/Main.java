@@ -15,6 +15,7 @@ public class Main {
 		printErrors(Query.class);
 		printErrors(Form.class);
 		printErrors(Procedure.class);
+		
 	}
 	
 	public static void printErrors(Class<?> klass) {
