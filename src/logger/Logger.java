@@ -5,11 +5,15 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.regex.Pattern;
+
 import java.text.SimpleDateFormat;
 
 public class Logger {
 	final static String fileName = "log.txt";
+	private String logClassName; 
 	
 	public static enum logType { 
 		INFO{
@@ -27,10 +31,18 @@ public class Logger {
 	}
 	
 	public Logger(Class<?> klass) {
-		// TODO Auto-generated constructor stub
+		logClassName = klass.getSimpleName();
 	}
 
-	public static void log( logType type, String msg ) {
+	public static void logError( String msg ) {
+		log( logType.ERROR, msg );
+	}
+	
+	public static void logInfo( String msg ) {
+		log( logType.INFO, msg );
+	}
+	
+	private static void log( logType type, String msg ) {
 		try (BufferedWriter writer = new BufferedWriter(
                 new FileWriter(fileName, true))){
 
@@ -44,9 +56,28 @@ public class Logger {
 		}
 	}
 	
-	public Object parseError() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<String> parseError() {
+		ArrayList<String> errorList = new ArrayList<String>();
+
+		try (BufferedReader reader = new BufferedReader(
+                new FileReader(fileName))){
+			String line;
+			
+			String regStr = new StringBuilder().append("^\\[ERROR\\].+").append(logClassName).append(" :.+$").toString();
+			Pattern pattern = Pattern.compile(regStr);
+			
+			while ((line = reader.readLine()) != null) {
+				if( pattern.matcher(line).matches() ) {
+					errorList.add(line.replaceFirst("^\\[ERROR\\]", "")
+						.replaceFirst(new StringBuilder().append(logClassName).append(" :").toString(), "") );
+				}
+			}
+		} catch (IOException e) {
+			System.out.println(e.getLocalizedMessage());
+			System.exit(-1);
+		} 
+
+		return errorList;
 	}
 
 }

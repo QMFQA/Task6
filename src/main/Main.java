@@ -14,13 +14,14 @@ public class Main {
 		ObjectList.get(0).delete().create().run().run();
 		ObjectList.get(1).create().run().create();
 		ObjectList.get(2).run().create().run().delete().delete();
-//		printErrors(Query.class);
-//		printErrors(Form.class);
-//		printErrors(Procedure.class);
+		
+		printErrors(Query.class);
+		printErrors(Form.class);
+		printErrors(Procedure.class);
 	}
-/*	
+	
 	public static void printErrors(Class<?> klass) {
 		System.out.println(klass.getSimpleName() + " errors:");
 		new Logger(klass).parseError().forEach(System.out::println);
-	} */
+	} 
 }
