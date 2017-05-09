@@ -3,9 +3,9 @@ package objects;
 public class Query extends QMFObject {
 	private String text;
 
-	public Query() {
-		name = "Query1";
-		text = "SELECT * FROM Q.STAFF";
+	public Query(String name, String text) {
+		super(name);
+		this.text = text;
 	}
 
 	@Override

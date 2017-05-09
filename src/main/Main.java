@@ -11,7 +11,7 @@ public class Main {
 	public static void main(String[] args) {
 		ObjectList.get(0).delete().create().run().run();
 		ObjectList.get(1).create().run().create();
-		ObjectList.get(2).run().create().run().delete().delete();
+		ObjectList.get(2).run().create().run().delete().delete();		
 		printErrors(Query.class);
 		printErrors(Form.class);
 		printErrors(Procedure.class);

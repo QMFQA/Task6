@@ -5,11 +5,12 @@ import java.util.List;
 
 public class ObjectList {
 
-	public static List<QMFObject> list = new ArrayList<QMFObject>();
+	private static List<QMFObject> list = new ArrayList<QMFObject>();
+
 	static {
-		list.add(new Query());
-		list.add(new Form());
-		list.add(new Procedure());
+		list.add(new Query("Query1", "SELECT * FROM Q.STAFF"));
+		list.add(new Form("Form1"));
+		list.add(new Procedure("Procedure1", "DISPLAY QUERY"));
 	}
 
 	public static QMFObject get(int number) {

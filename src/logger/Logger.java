@@ -27,7 +27,7 @@ public class Logger {
 	
 	public Logger(Class<?> klass) {
 		String className = klass.getSimpleName();
-		pattern = Pattern.compile("^\\[ERROR\\].*" + className + ":.*$");
+		pattern = Pattern.compile("^\\[ERROR\\]\\[(.*)\\]" + className + ":\\s(.*)$");
 	}
 
 	private void writeMessage(String method, String message) {
@@ -60,10 +60,7 @@ public class Logger {
 				String line = scanner.nextLine();
 				Matcher matches = pattern.matcher(line);
 				if (matches.matches()) {
-					String[] first = line.split("]");
-					String[] message = first[2].split(":");
-					String console = "(" + first[1].substring(1) + ")" + message[1];
-					result.add(console);
+					result.add(new StringBuffer().append("(").append(matches.group(1)).append(") ").append(matches.group(2)).toString());
 				}
 			}
 			scanner.close();

@@ -6,6 +6,10 @@ public abstract class QMFObject {
 	protected boolean created = false;
 	protected String name;
 	protected Logger logger = new Logger();
+	
+	public QMFObject(String name) {
+		this.name = name;
+	}
 
 	public abstract QMFObject create();
 
@@ -22,5 +26,4 @@ public abstract class QMFObject {
 	}
 
 	public abstract String getType();
-
 }

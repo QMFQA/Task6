@@ -2,13 +2,13 @@ package objects;
 
 public class Form extends QMFObject {
 
-	public Form() {
-		name = "Form1";
+	public Form(String name) {
+		super(name);
 	}
 
 	@Override
 	public QMFObject create() {
-		if (created == true) {
+		if (created) {
 			logger.error(getType() + ": Object with name '" + getName() + "' already exists");
 			return this;
 		} else {
@@ -26,7 +26,7 @@ public class Form extends QMFObject {
 
 	@Override
 	public QMFObject delete() {
-		if (created == true) {
+		if (created) {
 			created = false;
 			logger.info(getKey() + " is deleted");
 			return this;
