@@ -8,16 +8,17 @@ public class Procedure extends QMFObject {
 	public Procedure( String newName ) {
 		super();
 		name = newName;
+		logger = new Logger( this.getClass() );
 	}
 
 	@Override
 	public QMFObject create() {
 		if( Text == null ) {
 			Text = "DISPLAY QUERY";
-			Logger.logInfo( new StringBuilder().append(this.getClass().getSimpleName()).append(" : '").
+			logger.logInfo( new StringBuilder().append("'").
 					append(name).append("' with text '").append(Text).append("' is created").toString() );
 		} else {
-			Logger.logError( new StringBuilder().append(this.getClass().getSimpleName()).append(" : ").
+			logger.logError( new StringBuilder().
 					append("Object with name '").append(name).append("' is already exist").toString() );
 		}
 
@@ -27,10 +28,10 @@ public class Procedure extends QMFObject {
 	@Override
 	public QMFObject run() {
 		if( Text != null ) {
-			Logger.logInfo( new StringBuilder().append(this.getClass().getSimpleName()).append(" : '").
+			logger.logInfo( new StringBuilder().append("'").
 					append(name).append("' with text '").append(Text).append(" is run").toString() );
 		} else {
-			Logger.logError( new StringBuilder().append(this.getClass().getSimpleName()).append(" : ").
+			logger.logError( new StringBuilder().
 					append("Object '").append(name).append("' is not created and cannot be run").toString() );
 		}
 		
@@ -40,11 +41,11 @@ public class Procedure extends QMFObject {
 	@Override
 	public QMFObject delete() {
 		if( Text != null ) {
-			Logger.logInfo( new StringBuilder().append(this.getClass().getSimpleName()).append(" : '").
+			logger.logInfo( new StringBuilder().append("'").
 					append(name).append("' with text '").append(Text).append(" is deleted").toString() );
 			Text = null;
 		} else {
-			Logger.logError( new StringBuilder().append(this.getClass().getSimpleName()).append(" : ").
+			logger.logError( new StringBuilder().
 					append("Object with name '").append(name).append("' is not exist").toString() );
 		}
 		

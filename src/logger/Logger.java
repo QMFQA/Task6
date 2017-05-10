@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 
 public class Logger {
 	final static String fileName = "log.txt";
-	private String logClassName; 
+	private Class<?> logClass;
 	
 	public static enum logType { 
 		INFO{
@@ -31,23 +31,24 @@ public class Logger {
 	}
 	
 	public Logger(Class<?> klass) {
-		logClassName = klass.getSimpleName();
+		logClass = klass;
 	}
 
-	public static void logError( String msg ) {
+	public void logError( String msg ) {
 		log( logType.ERROR, msg );
 	}
 	
-	public static void logInfo( String msg ) {
+	public void logInfo( String msg ) {
 		log( logType.INFO, msg );
 	}
 	
-	private static void log( logType type, String msg ) {
+	private void log( logType type, String msg ) {
 		try (BufferedWriter writer = new BufferedWriter(
                 new FileWriter(fileName, true))){
 
 			writer.write(new StringBuilder().append(type).
 					append(new SimpleDateFormat("[yyyy-MM-dd hh:mm]").format(new Date())).
+					append(logClass.getSimpleName()).append(" : ").
 					append(msg).toString());
 			writer.newLine();
 
@@ -57,19 +58,20 @@ public class Logger {
 	}
 	
 	public ArrayList<String> parseError() {
+		final String entryType = "^\\[ERROR\\]";
 		ArrayList<String> errorList = new ArrayList<String>();
 
 		try (BufferedReader reader = new BufferedReader(
                 new FileReader(fileName))){
 			String line;
 			
-			String regStr = new StringBuilder().append("^\\[ERROR\\].+").append(logClassName).append(" :.+$").toString();
+			String regStr = new StringBuilder().append(entryType).append(".+").append(logClass.getSimpleName()).append(" :.+$").toString();
 			Pattern pattern = Pattern.compile(regStr);
 			
 			while ((line = reader.readLine()) != null) {
 				if( pattern.matcher(line).matches() ) {
-					errorList.add(line.replaceFirst("^\\[ERROR\\]", "")
-						.replaceFirst(new StringBuilder().append(logClassName).append(" :").toString(), "") );
+					errorList.add(line.replaceFirst(entryType, "")
+						.replaceFirst(new StringBuilder().append(logClass.getSimpleName()).append(" :").toString(), "") );
 				}
 			}
 		} catch (IOException e) {

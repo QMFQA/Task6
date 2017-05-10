@@ -1,11 +1,9 @@
 package main;
 
 import logger.Logger;
-import logger.Logger.logType;
 import objects.Form;
 import objects.ObjectList;
 import objects.Procedure;
-import objects.QMFObject;
 import objects.Query;
 
 public class Main {

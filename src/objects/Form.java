@@ -9,16 +9,17 @@ public class Form extends QMFObject {
 		super();
 		name = newName;
 		isCreated = false;
+		logger = new Logger( this.getClass() );
 	}
 
 	@Override
 	public QMFObject create() {
 		if( !isCreated ) {
 			isCreated = true;
-			Logger.logInfo( new StringBuilder().append(this.getClass().getSimpleName()).append(" : '").
+			logger.logInfo( new StringBuilder().append("'").
 					append(name).append("' is created").toString() );
 		} else {
-			Logger.logError( new StringBuilder().append(this.getClass().getSimpleName()).append(" : ").
+			logger.logError( new StringBuilder().
 					append("Object with name '").append(name).append("' is already exist").toString() );
 		}
 		
@@ -28,10 +29,10 @@ public class Form extends QMFObject {
 	@Override
 	public QMFObject run() {
 		if( isCreated ) {
-			Logger.logError( new StringBuilder().append(this.getClass().getSimpleName()).append(" : ").
+			logger.logError( new StringBuilder().
 					append("Cannot run form").toString() );
 		} else {
-			Logger.logError( new StringBuilder().append(this.getClass().getSimpleName()).append(" : ").
+			logger.logError( new StringBuilder().
 					append("Object with name '").append(name).append("' is not exist").toString() );
 		}
 		
@@ -42,10 +43,10 @@ public class Form extends QMFObject {
 	public QMFObject delete() {
 		if( isCreated ) {
 			isCreated = false;
-			Logger.logInfo( new StringBuilder().append(this.getClass().getSimpleName()).append(" : '").
+			logger.logInfo( new StringBuilder().append("'").
 					append(name).append("' is deleted").toString() );
 		} else {
-			Logger.logError( new StringBuilder().append(this.getClass().getSimpleName()).append(" : ").
+			logger.logError( new StringBuilder().
 					append("Object with name '").append(name).append("' is not exist").toString() );
 		}
 
