@@ -8,9 +8,9 @@ public class ObjectList {
 	static {
 		objs = new ArrayList<QMFObject>();
 		
-		objs.add( new Query("Query1") );
+		objs.add( new Query("Query1", "SELECT * FROM Q.STAFF") );
 		objs.add( new Form("Form1") );
-		objs.add( new Procedure("Procedure1") );
+		objs.add( new Procedure("Procedure1", "DISPLAY QUERY" ) );
 	}
 
 	public static QMFObject get( int i ) {
