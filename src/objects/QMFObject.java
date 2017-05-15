@@ -15,7 +15,7 @@ public abstract class QMFObject {
 	}
 	
 	public QMFObject create() {
-		if( objSet.add(name) ) {
+		if( !objSet.add(name) ) {
 			logger.logError( new StringBuilder().
 					append("Object with name '").append(name).
 					append("' is already exist").toString() );
