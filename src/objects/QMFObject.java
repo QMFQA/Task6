@@ -15,13 +15,12 @@ public abstract class QMFObject {
 	}
 	
 	public QMFObject create() {
-		if( objSet.contains(name)) {
+		if( objSet.add(name) ) {
 			logger.logError( new StringBuilder().
 					append("Object with name '").append(name).
 					append("' is already exist").toString() );
 		} else {
 			doCreate();
-			objSet.add(name);
 			isCreated = true;
 		}
 		
@@ -40,9 +39,8 @@ public abstract class QMFObject {
 	}
 	
 	public QMFObject delete() {
-		if( isCreated ) {
+		if( objSet.remove(name) ) {
 			doDelete();
-			objSet.remove(name);
 			isCreated = false;
 		} else {
 			logger.logError( new StringBuilder().
