@@ -1,20 +1,15 @@
 package objects;
 
-import logger.Logger;
-
 public class Procedure extends QMFObject {
 	String Text;
 	
 	public Procedure( String newName, String newText ) {
-		super();
-		name = newName;
+		super( newName );
 		Text = newText;
-		logger = new Logger( this.getClass() );
 	}
 
 	@Override
 	protected void doCreate() {
-		isCreated = true;
 		logger.logInfo( new StringBuilder().append("'").
 				append(name).append("' with text '").append(Text).append("' is created").toString() );
 	}
@@ -27,7 +22,6 @@ public class Procedure extends QMFObject {
 
 	@Override
 	protected void doDelete() {
-		isCreated = false;
 		logger.logInfo( new StringBuilder().append("'").
 				append(name).append("' with text '").append(Text).append(" is deleted").toString() );
 	}

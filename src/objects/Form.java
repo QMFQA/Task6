@@ -1,19 +1,13 @@
 package objects;
 
-import logger.Logger;
-
 public class Form extends QMFObject {
 
 	public Form(String newName) {
-		super();
-		name = newName;
-		isCreated = false;
-		logger = new Logger( this.getClass() );
+		super( newName );
 	}
 
 	@Override
 	protected void doCreate() {
-		isCreated = true;
 		logger.logInfo( new StringBuilder().append("'").
 				append(name).append("' is created").toString() );
 		}
@@ -26,7 +20,6 @@ public class Form extends QMFObject {
 
 	@Override
 	protected void doDelete() {
-		isCreated = false;
 		logger.logInfo( new StringBuilder().append("'").
 				append(name).append("' is deleted").toString() );
 	}
