@@ -1,9 +1,13 @@
 package objects;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import logger.Logger;
 
 public abstract class QMFObject {
-
+	
+	protected static Set<String> objectNames = new HashSet<>();
 	protected Logger log = new Logger(this.getClass());
 	
 	private boolean isCreated = false;
@@ -18,7 +22,7 @@ public abstract class QMFObject {
 	}
 
 	public QMFObject create() {
-		if (isCreated) {
+		if (!(objectNames.add(this.name))) {
 			log.error(String.format("Object with name '%s' already exists", this.name));
 		} else {
 			isCreated = true; 

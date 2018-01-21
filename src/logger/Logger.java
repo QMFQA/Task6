@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.text.SimpleDateFormat;
 
 public class Logger {
@@ -74,17 +76,20 @@ public class Logger {
 	public List<String> parseError() {
 		List<String> errors = new ArrayList<>();
 		
+		String replaceRegex = "(^\\[ERROR\\]\\[)(.*?)(\\])(.*?)$";
+		Pattern pattern = Pattern.compile(replaceRegex);
+		
 		try (Scanner scanner = new Scanner(new File(logFile))) {
 			while (scanner.hasNextLine()) {
 				String line = scanner.nextLine();
 				
-				if (line.contains(Level.ERROR.toString()) && line.contains(logClass.getSimpleName())) {
-					errors.add(new StringBuilder(line).
-							replace(0, 0 + Level.ERROR.toString().length(), "").
-							replace(0, 1, "(").
-							replace(17, 18, ")").
-							replace(18, 18 + logClass.getSimpleName().length() + 1, "").
-							toString());
+				String filterRegex = ".*ERROR.*?" + logClass.getSimpleName() + ".*";
+								
+				if (line.matches(filterRegex)) {
+					Matcher matcher = pattern.matcher(line);					
+					matcher.find();
+
+					errors.add("(" + matcher.group(2) + ") " + matcher.group(4));
 				}
 			}
 		} catch (IOException e) {
